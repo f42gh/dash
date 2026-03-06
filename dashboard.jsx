@@ -147,17 +147,14 @@ export default function Dashboard() {
   }, []);
 
   // Save data
-  const save = useCallback(
-    async (newData) => {
-      setData(newData);
-      try {
-        await window.storage.set(STORAGE_KEY, JSON.stringify(newData));
-      } catch (e) {
-        console.error("Save failed:", e);
-      }
-    },
-    []
-  );
+  const save = useCallback(async (newData) => {
+    setData(newData);
+    try {
+      await window.storage.set(STORAGE_KEY, JSON.stringify(newData));
+    } catch (e) {
+      console.error("Save failed:", e);
+    }
+  }, []);
 
   // ── Handlers ──
   const updateFocus = (val) => {
@@ -202,9 +199,7 @@ export default function Dashboard() {
   const toggleTodo = (id) => {
     save({
       ...data,
-      todos: data.todos.map((t) =>
-        t.id === id ? { ...t, done: !t.done } : t
-      ),
+      todos: data.todos.map((t) => (t.id === id ? { ...t, done: !t.done } : t)),
     });
   };
 
@@ -227,7 +222,8 @@ export default function Dashboard() {
   const daysUntilDeadline = () => {
     if (!data?.jobHunt?.nextDeadline) return null;
     const diff = Math.ceil(
-      (new Date(data.jobHunt.nextDeadline) - new Date()) / (1000 * 60 * 60 * 24)
+      (new Date(data.jobHunt.nextDeadline) - new Date()) /
+        (1000 * 60 * 60 * 24),
     );
     return diff;
   };
@@ -397,9 +393,7 @@ export default function Dashboard() {
                 weekday: "short",
               })}
             </div>
-            <div style={{ fontSize: "1.4rem", fontWeight: 700 }}>
-              {t.label}
-            </div>
+            <div style={{ fontSize: "1.4rem", fontWeight: 700 }}>{t.label}</div>
           </div>
           <div
             style={{
@@ -840,7 +834,7 @@ export default function Dashboard() {
                     日後 （
                     {new Date(data.jobHunt.nextDeadline).toLocaleDateString(
                       "ja-JP",
-                      { month: "short", day: "numeric" }
+                      { month: "short", day: "numeric" },
                     )}
                     ）
                   </span>
