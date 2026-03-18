@@ -1,29 +1,257 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font-family: 'Noto Sans JP', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: "Noto Sans JP", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: var(--bg);
+    color: var(--text);
+    transition:
+        background 1.5s ease,
+        color 1.5s ease;
+    min-height: 100dvh;
 }
 
-input, button {
-  font-family: inherit;
+input,
+button {
+    font-family: helvetica;
 }
 
-input:focus, button:focus {
-  outline: none;
+input:focus,
+button:focus {
+    outline: none;
+}
+
+.mono {
+    font-family: "helvetica neue", monospace;
+}
+
+.text-sub {
+    color: var(--text-sub);
+    font-size: 0.85rem;
+}
+
+/* layout */
+.app {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 24px 16px 48px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.header-left {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.logo {
+    font-family: "Helvetica Neue", monospace;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--accent);
+}
+
+.date {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* card */
+.card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 16px;
+    transition:
+        background 1.5s ease,
+        border-color 1.5s ease;
+}
+
+.card-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-sub);
+    margin-bottom: 10px;
+}
+
+/* anim */
+.anim {
+    animation: fadeSlideIn 0.4s ease both;
+}
+.anim:nth-child(2) {
+    animation-delay: 0.08s;
+}
+.anim:nth-child(3) {
+    animation-delay: 0.16s;
+}
+.anim:nth-child(4) {
+    animation-delay: 0.24s;
 }
 
 @keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50%       { transform: scale(1.05); }
+/* focus */
+.focus-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--accent);
+    font-size: 1.1rem;
+    color: var(--text);
+    padding: 4px 0;
+}
+
+.focus-text {
+    font-size: 1.1rem;
+    cursor: pointer;
+    min-height: 1.6em;
+}
+
+.placeholder {
+    color: var(--text-sub);
+    font-style: italic;
+}
+
+/* habits */
+.habit-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+}
+
+.habit-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+}
+
+.habit-btns {
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
+}
+
+/* todo */
+.todo-list {
+    list-style: none;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+}
+
+.todo-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+}
+
+.todo-item.done .todo-text {
+    text-decoration: line-through;
+    color: var(--text-sub);
+}
+
+.todo-text {
+    flex: 1;
+}
+
+.btn-x {
+    background: none;
+    border: none;
+    color: var(--text-sub);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+.btn-x:hover {
+    color: var(--danger);
+}
+
+.todo-add {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.todo-add input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--card-border);
+    color: var(--text);
+    padding: 4px 0;
+}
+
+/* buttons */
+.btn-sm {
+    background: var(--card-border);
+    border: none;
+    border-radius: 6px;
+    color: var(--text);
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: "Helvetica Neue", monospace;
+    transition: background 0.2s;
+}
+
+.btn-sm:hover {
+    background: var(--accent-sub);
+}
+
+/* deadline */
+.deadline-days {
+    font-size: 1rem;
+}
+.big {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+/* ring */
+.ring-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ring-text {
+    position: absolute;
+    font-size: 0.65rem;
+    color: var(--text-sub);
 }
